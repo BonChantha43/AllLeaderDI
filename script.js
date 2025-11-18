@@ -110,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const tr = document.createElement('tr');
             
-            // <<< ថ្មី (NEW) >>> - បាន​ប្តូរ​លំដាប់ "ឈ្មោះ" និង "ID"
             tr.innerHTML = `
                 <td data-label="ល.រ">${index + 1}</td>
                 <td data-label="ឈ្មោះ (Name)">${item.name || ''}</td>
