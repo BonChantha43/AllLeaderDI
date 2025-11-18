@@ -1,0 +1,448 @@
+/* --- 1. Global Styles & Variables --- */
+:root {
+    --primary-color: #0062E6; /* ពណ៌​ខៀវ​ទំនើប */
+    --primary-light: #e6f0ff;
+    --secondary-color: #6c757d;
+    --bg-color: #f4f7f6;      /* ពណ៌​ផ្ទៃ​ខាងក្រោយ​ស្រាល */
+    --card-bg-color: #ffffff;
+    --text-color: #212529;
+    --border-color: #e9ecef;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.06); /* ស្រមោល​ទន់ */
+    --border-radius: 12px; /* ជ្រុង​មូល​ជាង​មុន */
+}
+
+/* Universal box-sizing and font smoothing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: 'Noto Sans Khmer', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding-top: 80px; /* Space for sticky header */
+}
+
+/* --- 2. Container & Header --- */
+.container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 15px; /* Add horizontal padding to containers */
+}
+
+/* Separate header-content and main-content for padding */
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.main-content {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+header {
+    background-color: var(--card-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    
+    /* Sticky Header */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+h1 {
+    color: var(--primary-color);
+    margin: 0;
+    font-size: 1.5em; /* 1.5rem */
+}
+
+/* --- 3. Controls (Button) --- */
+.controls .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: 'Noto Sans Khmer', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%; /* Full width on mobile */
+}
+
+.controls .btn:hover {
+    background-color: #0052be;
+    box-shadow: 0 4px 10px rgba(0, 98, 230, 0.2);
+    transform: translateY(-2px);
+}
+
+.controls .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.controls .btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* --- 4. Stats Cards (ពី​ការ​កែ​លើក​មុន) --- */
+.stats-container {
+    display: grid;
+    /* 1 column on mobile */
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 0 0 15px 0; /* Updated padding */
+}
+
+.stat-card {
+    background-color: var(--card-bg-color);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 16px; 
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.card-icon {
+    flex-shrink: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; 
+    color: #ffffff;
+}
+
+.card-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.card-total .card-icon {
+    background-color: var(--primary-color);
+}
+.card-male .card-icon {
+    background-color: #198754; 
+}
+.card-female .card-icon {
+    background-color: #dc3545; 
+}
+
+.card-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.stat-card h3 {
+    margin: 0 0 4px 0;
+    font-size: 1em; 
+    font-weight: 500;
+    color: var(--secondary-color);
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stat-card p {
+    margin: 0;
+    font-size: 1.8em; 
+    font-weight: 700;
+    color: var(--text-color);
+    line-height: 1.1;
+}
+
+/* --- 5. Loader --- */
+.loader {
+    display: none;
+    text-align: center;
+    padding: 60px 15px;
+    font-size: 1.1em;
+    color: var(--secondary-color);
+}
+.loader.active {
+    display: block;
+}
+.spinner {
+    border: 5px solid var(--primary-light);
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px auto;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- 6. Table (Desktop View) --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    -webkit-overflow-scrolling: touch;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    min-width: 800px; /* Force horizontal scroll on medium screens */
+}
+
+table th, table td {
+    border-bottom: 1px solid var(--border-color);
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* Style សម្រាប់ "ល.រ" */
+table th:first-child,
+table td:first-child {
+    text-align: center;
+    width: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+table thead {
+    background-color: #f9fafb;
+}
+
+table thead th {
+    font-weight: 700;
+    color: #374151;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table tbody tr:hover {
+    background-color: #fcfdff;
+}
+
+table td a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+table td a:hover {
+    color: #0041a3;
+    text-decoration: underline;
+}
+
+
+/* <<< ថ្មី (NEW) >>> */
+/* --- 6.5 Responsive Card View (Mobile) --- */
+@media (max-width: 768px) {
+    
+    /* 1. ដក​ Style ចេញ​ពី​ Table Container */
+    .table-container {
+        box-shadow: none;
+        border: none;
+        background-color: transparent;
+        overflow-x: hidden; 
+    }
+
+    /* 2. កំណត់​ Table ឱ្យ​ពេញ​ */
+    table {
+        min-width: 100%;
+        border-collapse: separate; /* ប្រើ​ គម្លាត (gap) */
+        border-spacing: 0;
+    }
+
+    /* 3. លាក់​ក្បាល​តារាង (Header) */
+    table thead {
+        display: none;
+    }
+
+    /* 4. បំប្លែង TBODY ទៅ​ជា Grid 2-columns */
+    table tbody {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 ជួរ​ឈរ */
+        gap: 12px; /* គម្លាត​រវាង Card */
+    }
+
+    /* 5. បំប្លែង​ជួរ​ដេក (TR) ឱ្យ​ទៅ​ជា Card */
+    table tr {
+        display: flex; /* ប្រើ Flexbox ក្នុង​ Card នីមួយៗ */
+        flex-direction: column; /* តម្រៀប​ TD ចុះ​ក្រោម */
+        background-color: var(--card-bg-color);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        width: 100%;
+    }
+    
+    table tbody tr:hover {
+        background-color: var(--card-bg-color);
+    }
+    
+    /* 6. បំប្លែង​ប្រអប់ (TD) ឱ្យ​តម្រៀប​គ្នា​ក្នុង Card */
+    table td {
+        display: block; 
+        width: 100%;
+        text-align: right; 
+        padding: 10px 12px; /* ទំហំ​តូច​ជាង​មុន​សម្រាប់ Card */
+        white-space: normal; 
+        border-bottom: 1px solid var(--border-color);
+    }
+    
+    /* 7. បង្កើត​ស្លាក (Label) ដោយ​ប្រើ 'data-label' */
+    table td::before {
+        content: attr(data-label); 
+        float: left; 
+        font-weight: 700;
+        color: var(--text-color);
+        padding-right: 10px; 
+        white-space: nowrap; 
+        font-size: 0.9em; /* ធ្វើ​ឱ្យ Label តូច​ជាង​ Value */
+    }
+    
+    /* 8. រៀបចំ​ Style ពិសេស */
+    table td:first-child { /* ល.រ */
+        text-align: center;
+        background-color: #f9fafb;
+        border-top-left-radius: var(--border-radius);
+        border-top-right-radius: var(--border-radius);
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    
+    table td:first-child::before {
+        display: none;
+    }
+
+    table td:nth-child(2) { /* ឈ្មោះ (Name) */
+        font-weight: 700; /* ធ្វើ​ឱ្យ​ឈ្មោះ​ដិត */
+        color: var(--text-color);
+    }
+
+    table td:last-child {
+        border-bottom: none;
+    }
+    
+    /* សម្រាប់​សារ "No data" */
+    table tr:has(td[colspan="7"]) {
+        display: block; /* ត្រឡប់​ទៅ​ទម្រង់​ពេញ​វិញ */
+    }
+    table td[colspan="7"] {
+        text-align: center;
+        width: 100%;
+    }
+}
+/* <<< ចប់​កូដ​ថ្មី >>> */
+
+
+/* --- 7. Print Styles (Hidden) --- */
+@media print {
+    body {
+        padding: 0;
+        background-color: white;
+    }
+    .container {
+        padding: 0;
+        box-shadow: none;
+    }
+    header, .controls, .stats-container, .loader {
+        display: none;
+    }
+    .table-container {
+        overflow: visible;
+        box-shadow: none;
+        border: none;
+    }
+    table {
+        font-size: 10pt;
+        min-width: 100%;
+    }
+    table td a {
+        color: black;
+        text-decoration: none;
+    }
+}
+
+/* --- 8. Responsive (Desktop) --- */
+@media (min-width: 600px) {
+    /* 2 columns for stats on small tablets */
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .controls .btn {
+        width: auto; /* Auto width on larger screens */
+    }
+}
+
+@media (min-width: 769px) { /* ធ្វើ​ឱ្យ​វា​ធំ​ជាង 768px */
+    body {
+        padding-top: 90px; /* Taller header */
+    }
+
+    .container {
+        padding: 0 25px; /* Desktop horizontal padding */
+    }
+
+    .header-content {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .main-content {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    /* 3 columns for stats on desktop */
+    .stats-container {
+        grid-template-columns: repeat(3, 1fr);
+        padding-bottom: 25px;
+    }
+
+    table {
+        font-size: 16px;
+    }
+}

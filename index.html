@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>បញ្ជីប្រធានក្រុម DI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <h1>បញ្ជីឈ្មោះប្រធានក្រុម-DI</h1>
+            <div class="controls">
+                <button id="printButton" class="btn btn-print">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2H5zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4V3zm1 5a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-1 2v-1h6v1a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1z"/>
+                    </svg>
+                    ថត / Save PDF
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="stats-container">
+            
+            <div class="stat-card card-total">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>សរុប (Total)</h3>
+                    <p id="totalCount">0</p>
+                </div>
+            </div>
+
+            <div class="stat-card card-male">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>ប្រុស (Male)</h3>
+                    <p id="maleCount">0</p>
+                </div>
+            </div>
+
+            <div class="stat-card card-female">
+                <div class="card-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="card-info">
+                    <h3>ស្រី (Female)</h3>
+                    <p id="femaleCount">0</p>
+                </div>
+            </div>
+
+        </div>
+        <div id="loader" class="loader">
+            <div class="spinner"></div>
+            <p>កំពុងទាញទិន្នន័យ...</p>
+        </div>
+
+        <div class="table-container">
+            <table id="leaderTable">
+                <thead>
+                    <tr>
+                        <th>ល.រ</th>
+                        <th>ឈ្មោះ (Name)</th> <th>ID</th> <th>ភេទ (Sex)</th>
+                        <th>ក្រុម (Group)</th>
+                        <th>តួនាទី (Role)</th>
+                        <th>Telegram</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
