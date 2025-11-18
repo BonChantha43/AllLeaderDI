@@ -23,7 +23,8 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
-    padding-top: 80px; /* Space for sticky header */
+    /* <<< ថ្មី (NEW) >>> - បង្កើន​គម្លាត​សម្រាប់ Header ដែល​ធ្លាក់​ចុះ */
+    padding-top: 125px; 
 }
 
 /* --- 2. Container & Header --- */
@@ -37,7 +38,7 @@ body {
 /* Separate header-content and main-content for padding */
 .header-content {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* ធ្វើ​ឱ្យ​ប៊ូតុង​ធ្លាក់​ចុះ​ក្រោម​បាន */
     justify-content: space-between;
     align-items: center;
     gap: 15px;
@@ -105,10 +106,9 @@ h1 {
     height: 18px;
 }
 
-/* --- 4. Stats Cards (ពី​ការ​កែ​លើក​មុន) --- */
+/* --- 4. Stats Cards (Desktop View) --- */
 .stats-container {
     display: grid;
-    /* 1 column on mobile */
     grid-template-columns: 1fr;
     gap: 15px;
     padding: 0 0 15px 0; /* Updated padding */
@@ -271,11 +271,46 @@ table td a:hover {
 }
 
 
-/* <<< ថ្មី (NEW) >>> */
-/* --- 6.5 Responsive Card View (Mobile) --- */
+/* <<< ថ្មី (NEW) - កូដ​សម្រាប់​ទូរស័ព្ទ​ទាំង​អស់ >>> */
 @media (max-width: 768px) {
     
-    /* 1. ដក​ Style ចេញ​ពី​ Table Container */
+    body {
+        /* កំណត់​គម្លាត​ខាង​លើ​សម្រាប់​តែ​ទូរស័ព្ទ */
+        padding-top: 125px;
+    }
+
+    /* --- 4.5 Mobile Stats Row --- */
+    .stats-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 ជួរ​ឈរ */
+        gap: 8px; /* គម្លាត​តូច​ល្មម */
+        padding-bottom: 20px; /* គម្លាត​ពី​ Card ខាង​ក្រោម */
+    }
+    .stat-card {
+        flex-direction: column; /* តម្រៀប Icon លើ​អក្សរ */
+        align-items: center; /* ដាក់​ចំ​កណ្ដាល */
+        padding: 12px 8px; /* ទំហំ​តូច​ល្មម */
+        gap: 5px;
+    }
+    .card-icon {
+        width: 40px; /* រង្វង់ Icon តូច​ជាង​មុន */
+        height: 40px;
+    }
+    .card-icon svg {
+        width: 20px; /* Icon តូច​ជាង​មុន */
+        height: 20px;
+    }
+    .stat-card h3 {
+        font-size: 0.8em; /* អក្សរ​ចំណង​ជើង​តូច */
+        margin: 0;
+        text-align: center;
+    }
+    .stat-card p {
+        font-size: 1.5em; /* លេខ​តូច​ជាង​មុន */
+    }
+
+
+    /* --- 6.5 Responsive Card View (Mobile) --- */
+    
     .table-container {
         box-shadow: none;
         border: none;
@@ -283,29 +318,26 @@ table td a:hover {
         overflow-x: hidden; 
     }
 
-    /* 2. កំណត់​ Table ឱ្យ​ពេញ​ */
     table {
         min-width: 100%;
-        border-collapse: separate; /* ប្រើ​ គម្លាត (gap) */
+        border-collapse: separate; 
         border-spacing: 0;
     }
 
-    /* 3. លាក់​ក្បាល​តារាង (Header) */
     table thead {
         display: none;
     }
 
-    /* 4. បំប្លែង TBODY ទៅ​ជា Grid 2-columns */
+    /* ប្លង់​ Card បែប 2-columns */
     table tbody {
         display: grid;
         grid-template-columns: 1fr 1fr; /* 2 ជួរ​ឈរ */
-        gap: 12px; /* គម្លាត​រវាង Card */
+        gap: 10px; /* គម្លាត​រវាង Card */
     }
 
-    /* 5. បំប្លែង​ជួរ​ដេក (TR) ឱ្យ​ទៅ​ជា Card */
     table tr {
-        display: flex; /* ប្រើ Flexbox ក្នុង​ Card នីមួយៗ */
-        flex-direction: column; /* តម្រៀប​ TD ចុះ​ក្រោម */
+        display: flex; 
+        flex-direction: column; 
         background-color: var(--card-bg-color);
         border-radius: var(--border-radius);
         box-shadow: var(--shadow);
@@ -317,28 +349,28 @@ table td a:hover {
         background-color: var(--card-bg-color);
     }
     
-    /* 6. បំប្លែង​ប្រអប់ (TD) ឱ្យ​តម្រៀប​គ្នា​ក្នុង Card */
     table td {
         display: block; 
         width: 100%;
         text-align: right; 
-        padding: 10px 12px; /* ទំហំ​តូច​ជាង​មុន​សម្រាប់ Card */
+        padding: 9px 12px; /* កែ​ឱ្យ​តូច​ល្មម */
         white-space: normal; 
         border-bottom: 1px solid var(--border-color);
+        font-weight: 500; /* តម្លៃ (Value) ដិត​ល្មម */
     }
     
-    /* 7. បង្កើត​ស្លាក (Label) ដោយ​ប្រើ 'data-label' */
+    /* រចនា​ស្លាក (Label) ឱ្យ​ស្អាត */
     table td::before {
         content: attr(data-label); 
         float: left; 
-        font-weight: 700;
-        color: var(--text-color);
+        font-weight: 500; /* មិន​ដិត​ខ្លាំង */
+        color: var(--secondary-color); /* ពណ៌​ប្រផេះ */
         padding-right: 10px; 
         white-space: nowrap; 
-        font-size: 0.9em; /* ធ្វើ​ឱ្យ Label តូច​ជាង​ Value */
+        font-size: 0.85em; /* តូច​ជាង​តម្លៃ */
     }
     
-    /* 8. រៀបចំ​ Style ពិសេស */
+    /* រចនា​ Style ពិសេស​ក្នុង Card */
     table td:first-child { /* ល.រ */
         text-align: center;
         background-color: #f9fafb;
@@ -353,24 +385,23 @@ table td a:hover {
     }
 
     table td:nth-child(2) { /* ឈ្មោះ (Name) */
-        font-weight: 700; /* ធ្វើ​ឱ្យ​ឈ្មោះ​ដិត */
-        color: var(--text-color);
+        font-weight: 700; /* ឈ្មោះ​ដិត​ខ្លាំង */
+        color: var(--primary-color); /* ឈ្មោះ​ពណ៌​ខៀវ */
     }
 
     table td:last-child {
         border-bottom: none;
     }
     
-    /* សម្រាប់​សារ "No data" */
     table tr:has(td[colspan="7"]) {
-        display: block; /* ត្រឡប់​ទៅ​ទម្រង់​ពេញ​វិញ */
+        display: block;
     }
     table td[colspan="7"] {
         text-align: center;
         width: 100%;
     }
 }
-/* <<< ចប់​កូដ​ថ្មី >>> */
+/* <<< ចប់​កូដ​សម្រាប់​ទូរស័ព្ទ >>> */
 
 
 /* --- 7. Print Styles (Hidden) --- */
@@ -413,9 +444,9 @@ table td a:hover {
     }
 }
 
-@media (min-width: 769px) { /* ធ្វើ​ឱ្យ​វា​ធំ​ជាង 768px */
+@media (min-width: 769px) { /* ធំ​ជាង 768px */
     body {
-        padding-top: 90px; /* Taller header */
+        padding-top: 90px; /* ត្រឡប់​ទៅ​ទំហំ​ Desktop វិញ */
     }
 
     .container {
